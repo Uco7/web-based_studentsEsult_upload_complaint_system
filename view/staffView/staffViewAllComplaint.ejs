@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>staff dashbord/All Complaint Page</title>
+     <link rel="stylesheet" href="/css/dashbord.css">
+    <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css">
+    <script src="https://kit.fontawesome.com/56adb67a5b.js" crossorigin="anonymous"></script>
+    
+    </head>
+    <body>
+          <!-- small screen nav ............................................................. -->
+
+  <!-- sidebar nav ............................................................. -->
+
+
+  <%- include('_staffIncludeFolder/staffNavBar') %>
+
+  <!-- sidebar nav ............................................................. -->
+
+  <%- include('_staffIncludeFolder/staffAcordium') %>
+
+          
+    
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12 col-md-3 col-lg-2 sidebar">
+                <div id="user">
+                    
+                </div>
+                <!-- including sidebar -->
+               <!-- including sidebar -->
+               <%- include('_staffIncludeFolder/staffSideBar') %>  
+            </div>
+            <div class="col-12 col-md-9 col-lg-10 main-content">
+              
+                
+        </div>
+        
+        <div class="container wrap-table ">
+            <div class="wrap-txt text-center">
+              <h2 class="text-center"  id="h2">All  Complaints</h2>
+            </div>
+          <table  >
+            <thead>
+                <tr>
+                    <th>S/N</th>
+                    <th>NAME</th>
+                    <th>MATRIC</th>
+                    <th>DEPARTMENT</th>
+                    <th>COURSE TITLE</th>
+                    <th>COURSE CODE</th>
+                    <th>GENDER</th>
+                    <th>PHONE NUMBER</th>
+                    <th>EMAIL</th>
+                    <th>LEVEL</th>
+                    <th>SECTION</th>
+                    <th>SEMESTER</th>
+                    <th>COMPLAINT DATE</th>
+                    <th>VIEW</th>
+                </tr>
+            </thead>
+            <tbody id="studentTableBody">
+                <% for (let i = 0; i < allComplaints.length; i++) { %>
+                    <tr>
+                        <td><%= i + 1 %></td>
+                        
+                        <td><%= allComplaints[i].student.fname %> <%= allComplaints[i].student.lname %></td>
+                        <td><%= allComplaints[i].student.matric %></td>
+                        <td><%= allComplaints[i].student.department %></td>
+                        <td><%= allComplaints[i].course_title %></td>
+                        <td><%= allComplaints[i].course_code%> </td>
+                        <td><%= allComplaints[i].student.gender %></td>
+                        <td><%= allComplaints[i].student.phone_no %></td>
+                        <td><%= allComplaints[i].student.email %></td>
+                        <td><%= allComplaints[i].level %></td>
+                        <td><%= allComplaints[i].section %></td>
+                        <td><%= allComplaints[i].semester %></td>
+                        
+                        <td><%= new Date(allComplaints[i].complaint_date).toLocaleDateString() %></td>
+                        <td id="view-td"><a href="/staff/view/complaint?id=<%= allComplaints[i]._id %>">View</a></td>
+                    </tr>
+                <% } %>
+            </tbody>
+            
+            </table>
+
+          </div>
+    </div>
+    </div>
+   
+    <!-- jQuery library -->
+    <script src="/jquery/jquery.min.js"></script>
+    <!-- Bootstrap JS Bundle (includes Popper) -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/5.1.0/js/bootstrap.bundle.min.js"></script>
+  
+    <script src="/js/userDashBord.js"></script>
+    <script src="./node_modules/bootstrap/dist/js/bootstrap.bundle.js"></script>
+    <script>
+        function openNav() {
+          document.getElementById("mySidenav").style.width = "100%";
+          document.getElementById("mySidenav").style.height = "40%";
+          document.getElementById("main").classList.add("open"); // Add class to push down
+        }
+        
+        function closeNav() {
+          document.getElementById("mySidenav").style.width = "0";
+          document.getElementById("main").classList.remove("open"); // Remove class to return to original position
+        }
+        </script> <script src="/js/staffDashBord.js"></script>
+</body>
+</html>

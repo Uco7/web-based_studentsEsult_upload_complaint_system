@@ -1,0 +1,116 @@
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard/ Student Uploaded Result Page</title>
+    <link rel="stylesheet" href="/css/dashbord.css">
+    <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css">
+    <script src="https://kit.fontawesome.com/56adb67a5b.js" crossorigin="anonymous"></script>
+    
+    </head>
+    <body>
+          <!-- small screen nav ............................................................. -->
+<!-- including admin navbar -->
+<%- include('_includeFolder/adminNav') %>
+<!-- including admin navbar -->
+
+    
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12 col-md-3 col-lg-2 sidebar">
+                <div id="user">
+                    
+                </div>
+                <!-- including sidebar -->
+                <%- include('_includeFolder/_adminSideBar') %>
+
+            </div>
+            <!-- include  acordium -->
+            <%- include('_includeFolder/adminAcordium') %>
+            <!-- include  acordium -->
+            <div class="col-12 col-md-9 col-lg-10 main-content">
+              
+                
+        </div>
+        <div class="container wrap-table">
+          <div class="resolve-complaint">
+            <span class="h4">Resolved Complaints</span>
+            <input type="text" id="customSearchBox" class="form-control custom-search-input" placeholder="Search by name, matric number, or date...">
+          </div>
+        
+          <table id="complaintTable">
+            <thead>
+              <tr>
+                <th>S/N</th>
+                <th>Name</th>
+                <th>Matric Number</th>
+                <th>Department</th>
+                <th>Section</th>
+                <th>Level</th>
+                <th>Semester</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% for (let i = 0; i < uploadedResult.length; i++) { %>
+                <tr>
+                  <td><%= i + 1 %></td>
+                  <td><%= uploadedResult[i].name %></td>
+                  <td><%= uploadedResult[i].matric %></td>
+                  <td><%= uploadedResult[i].department %></td>
+                  <td><%= uploadedResult[i].section %></td>
+                  <td><%= uploadedResult[i].level %></td>
+                  <td><%= uploadedResult[i].semester %></td>
+                  <td>
+                    <a href="/admin/view/student/result?id=<%= uploadedResult[i]._id %>">View</a>
+                  </td>
+                </tr>
+              <% } %>
+            </tbody>
+          </table>
+        </div>
+        
+        <script>
+          // Store the original order of rows
+          var originalRows = Array.from(document.querySelectorAll('#complaintTable tbody tr'));
+        
+          document.getElementById('customSearchBox').addEventListener('input', function () {
+            var searchValue = this.value.toLowerCase();
+            var table = document.querySelector('#complaintTable tbody');
+            var rows = Array.from(table.querySelectorAll('tr'));
+        
+            if (searchValue === "") {
+              // If no input, restore the original table order
+              table.innerHTML = '';
+              originalRows.forEach(function (row) {
+                table.appendChild(row);
+                row.style.display = ''; // Show all rows
+              });
+            } else {
+              rows.forEach(function (row) {
+                var name = row.cells[1].textContent.toLowerCase();       // Name column (index 1)
+                var matricNumber = row.cells[2].textContent.toLowerCase(); // Matric number column (index 2)
+                var submitDate = new Date(row.cells[6].textContent).toLocaleDateString().toLowerCase(); // Submit date column (index 6)
+                
+                // Check if the search value matches any of the relevant fields
+                if (name.includes(searchValue) || matricNumber.includes(searchValue) || submitDate.includes(searchValue)) {
+                  row.style.display = ''; // Show the row
+                } else {
+                  row.style.display = 'none'; // Hide the row
+                }
+              });
+            }
+          });
+        </script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.min.js"></script>
+        
+        <script src="/js/adminDashBord.js"></script>
+
+</body>
+</html>
+

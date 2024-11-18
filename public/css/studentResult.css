@@ -1,0 +1,158 @@
+body{
+    background-color: mintcream !important;
+}
+.notification{
+    position: relative;
+}
+.notification #red{
+    position: absolute;
+    left: 8px;
+    bottom: 1rem;
+    border-radius: 50%;
+    width: 12px;
+    height: 12px;
+    text-align: center;
+    align-items: center;
+    font-weight: 600;
+     font-size: 10px;
+     color: #fff;
+    background-color: red;
+   
+
+
+}
+.accordion{
+    width: 500px;
+    position: absolute;
+    left: 20%;
+    display: none;
+    z-index: 1;
+    background-color: red;
+
+}
+.navbar{
+    background-color: mintcream !important;
+    color: aliceblue;
+
+    box-shadow: 2px 4px 2px rgb(236, 236, 240);
+    }
+    
+    .sidebar{
+      
+    background-color: #70837d;
+    color: aliceblue;
+    height: 150vh;
+    box-shadow: 2px 4px 2px rgb(236, 236, 240) ;
+    
+    
+    }
+    
+    .sidebar .cont{
+        
+        margin-top: 50px;
+        padding: auto;
+       
+        font-size: larger;
+        
+        
+        }
+        .sidebar .cont li{
+            padding: 5px;
+            /* box-shadow:  0 1px 1px; */
+         
+            margin: 20px;
+            text-align: center;
+    
+    
+    }
+    .sidebar .cont li a{
+        color: white;
+        
+        }
+        .sidebar .cont li :hover{
+            
+            background-color: mintcream !important;
+            color: rgb(255, 136, 0) !important;
+
+
+        
+            
+            }
+            .sidebar-top{
+                margin-top: 10%;
+            }
+         .main-content  table th{
+                background-color: #70837d !important;
+                color: #fff;
+            }
+            .main-content  table {
+                width: 80%;
+            }
+            .row .check-result{
+                
+                position: relative;
+                
+
+            }
+            .row .check-result form{
+                position: absolute;
+                left: 30rem;
+                width: 50%;
+                bottom:40rem;
+            }
+            .row .check-result #h2-check {
+                position: absolute;
+                left: 30rem;
+                width: 50%;
+                bottom:60rem;
+            }
+            .row .layComplaint{
+                position: relative;
+               
+            }
+            .row .layComplaint form{
+                position: absolute;
+                left: 20rem;
+                width: 60vw;
+                bottom: 10rem;
+               
+            }
+            /* ssmall screen size/////////////// */
+            @media (max-width:770px) {
+                .row .check-result form{
+                    position: absolute;
+                    left: 10rem;
+                    width: 50%;
+                    top: 5rem;
+                    
+                }
+                .row .check-result #h2-check {
+                    position: absolute;
+                    left: 10rem;
+                    width: 50%;
+                    top: 2rem;
+                }
+                .row .layComplaint form{
+                    position: absolute;
+                    left: 5rem;
+                    width: 60vw;
+                    top: 10rem;
+                   
+                }
+                .main-content  table {
+                    width: 30%;
+                    font-size: small;
+                    margin-left: -3rem;
+                }
+                
+            }
+            @media (max-width:610px) {
+              
+                .main-content  table {
+                    width: 10%;
+                    font-size: smaller;
+                    /* margin-left: -3rem; */
+                }
+                
+            }
+            /* ssmall screen size/////////////// */

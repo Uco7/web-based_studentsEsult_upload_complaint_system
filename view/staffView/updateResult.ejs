@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>staff dashbord/update Result page</title>
+      <link rel="stylesheet" href="/css/dashbord.css">
+    <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css">
+    <script src="https://kit.fontawesome.com/56adb67a5b.js" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.13/jspdf.plugin.autotable.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+
+
+</head>
+    <body>
+          <!-- small screen nav ............................................................. -->
+
+  <!-- sidebar nav ............................................................. -->
+
+
+  <%- include('_staffIncludeFolder/staffNavBar') %>
+
+  <!-- sidebar nav ............................................................. -->
+
+
+  
+  <%- include('_staffIncludeFolder/staffAcordium') %>
+
+  <div class="container-fluid">
+  <div class="row">
+      <div class="col-12 col-md-3 col-lg-2 sidebar">
+          <div id="user">
+              
+          </div>
+          <!-- including sidebar -->
+        <!-- including sidebar -->
+        <%- include('_staffIncludeFolder/staffSideBar') %> 
+      </div>
+      <div class="container mt-5">
+        <!-- The Modal -->
+        <div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content" style="background-color:#70837d; color: white; font-size: large; font-weight: 600;">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Responsive Modal</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <p>Notice Notice.......</p>
+                        <p> To update the  student result,  Click downloadPdf button  to convert  the updated result to pdf</p>
+                        <p>On window hold shift +window + S to get the screenshot of the downloaded Pdf</p>
+                        <p>Proceed to resolve the student complaint by clicking  On the forward to admin button</p>
+                        <p>On the redirected page  upload the screenshoted update of the result , and as well as the exam attendance sheet.</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+                    <div class="txt-instructioin">
+                        <h2 class="text-center"> Upload  Student Result</h2>
+                    </div>           
+              <!-- <div class="col-12 col-md-9 col-lg-10 main-content"> -->
+                  <div class="wrapp-table">
+                    <form id="registrationForm">
+                        <div class="h3">
+                            <% if(user){ %>
+                                <h3 class="text-center">Update Result for <%= user.name %> </h3>
+                            <%  } else { %>
+                                <h3 class="text-center">Loading User record, but not found.</h3>
+                            <% } %>  
+                        </div>
+                        
+                        <!-- User section -->
+                        <div class="row user-setion">
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="name" class="form-label">Full Name:</label>
+                                    <input type="text" class="form-control" id="name" name="name" value="<%= user && user.name ? user.name : '' %>" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="matric" class="form-label">Matric:</label>
+                                    <input type="text" class="form-control" id="matric" name="matric" value="<%= user && user.matric ? user.matric : '' %>" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="department" class="form-label">Department:</label>
+                                    <input type="text" class="form-control" id="department" name="department" value="<%= user && user.department ? user.department : '' %>" required>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <!-- Section, Level, Semester -->
+                                <div class="mb-3">
+                                    <label for="section" class="form-label">Section:</label>
+                                    <select name="section" id="section" class="form-control" required>
+                                        <option value="">Choose section</option>
+                                        <option value="2020/2021" <%= user && user.section === '2023/2024' ? 'selected' : '' %>>2020/2021</option>
+                                        <option value="2021/2022" <%= user && user.section === '2024/2026' ? 'selected' : '' %>>2021/2022</option>
+                                        <option value="2022/2023" <%= user && user.section === '2026/2027' ? 'selected' : '' %>>2022/2023</option>
+                                        <option value="2023/2024" <%= user && user.section === '2023/2024' ? 'selected' : '' %>>2023/2024</option>
+                                        <option value="2024/2025" <%= user && user.section === '2024/2026' ? 'selected' : '' %>>2024/2025</option>
+                                        <option value="2025/2026" <%= user && user.section === '2026/2027' ? 'selected' : '' %>>2025/2026</option>
+                                    </select>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="level" class="form-label">Level:</label>
+                                    <select name="level" id="level" class="form-control" required>
+                                        <option value="">Choose level</option>
+                                        <option value="100" <%= user && user.level === 100 ? 'selected' : '' %>>100</option>
+                                        <option value="200" <%= user && user.level === 200 ? 'selected' : '' %>>200</option>
+                                        <option value="300" <%= user && user.level === 300 ? 'selected' : '' %>>300</option>
+                                        <option value="400" <%= user && user.level === 400 ? 'selected' : '' %>>400</option>
+                                    </select>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="semester" class="form-label">Semester:</label>
+                                    <select name="semester" id="semester" class="form-control" required>
+                                        <option value="">Choose semester</option>
+                                        <option value="first" <%= user && user.semester === 'first' ? 'selected' : '' %>>First Semester</option>
+                                        <option value="second" <%= user && user.semester === 'second' ? 'selected' : '' %>>Second Semester</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Courses Table -->
+                        <div class="container wrap-table" id="up-table">
+                            <div class="wrap-txt text-center">
+                                <h2 class="text-center" id="h2">Update Records</h2>
+                            </div>
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>COURSE TITLE</th>
+                                        <th>COURSE CODE</th>
+                                        <th>COURSE UNIT</th>
+                                        <th>ASSESSMENT 1</th>
+                                        <th>ASSESSMENT 2</th>
+                                        <th>EXAM SCORE</th>
+                                        <th>TOTAL SCORE</th>
+                                        <th>GRADE</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="coursesTableBody">
+                                    <% if (user && user.courses && user.courses.length) { %>
+                                        <% user.courses.forEach((course, index) => { %>
+                                            <tr>
+                                                <td data-label="COURSE TITLE">
+                                                    <input type="text" name="courses[<%= index %>][course_title]" value="<%= course.course_title %>" required>
+                                                </td>
+                                                <td data-label="COURSE CODE">
+                                                    <input type="text" name="courses[<%= index %>][course_code]" value="<%= course.course_code %>" required>
+                                                </td>
+                                                <td data-label="COURSE UNIT">
+                                                    <input type="number" name="courses[<%= index %>][course_unit]" value="<%= course.course_unit %>" required>
+                                                </td>
+                                                <td data-label="ASSESSMENT1">
+                                                    <input type="number" name="courses[<%= index %>][assessment1]" value="<%= course.assessment1 %>" required>
+                                                </td>
+                                                <td data-label="ASSESSMENT2">
+                                                    <input type="number" name="courses[<%= index %>][assessment2]" value="<%= course.assessment2 %>" required>
+                                                </td>
+                                                <td data-label="EXAM SCORE">
+                                                    <input type="number" name="courses[<%= index %>][exam_score]" value="<%= course.exam_score %>" required>
+                                                </td>
+                                                <td data-label="TOTAL SCORE">
+                                                    <input type="number" name="courses[<%= index %>][total_score]" value="<%= course.total_score %>" required>
+                                                </td>
+                                                <td data-label="GRADE">
+                                                    <input type="text" name="courses[<%= index %>][grade]" value="<%= course.grade %>" required>
+                                                </td>
+                                            </tr>
+                                        <% }); %>
+                                    <% } else { %>
+                                        <tr><td colspan="8" class="text-center">No courses available</td></tr>
+                                    <% } %>
+                                </tbody>
+                            </table>
+                            
+                            <% if (user && user._id) { %>
+                                <div class="wrap-btn">
+                                <button type="submit" class="btn btn-primary " data-id="<%= user._id %>">Update</button>
+                                <button type="submit" class="btn btn-secondary" id="foward" ><a href="/staff/proceed/resolve/complaint?mat_no=<%=user.matric  %>&semester=<%=user.semester  %>">Forward To Admin </a> </button>
+                                <a  class="btn btn-danger" id="downloadButton">Download PNG</a>
+                           
+
+                            </div>
+                               
+                                <% } %>
+                        </div>
+                    </form>
+                  </div>
+              </div>
+              <!-- including admin sidebar -->
+             
+              <script>
+                // Wait until the page is fully loaded
+                window.addEventListener('load', function () {
+                    setTimeout(function(){
+        
+                        var myModal = new bootstrap.Modal(document.getElementById('myModal'));
+                        myModal.show();
+                    },3000)
+                });
+            </script>
+        
+            <!-- PNG download functionality -->
+
+   
+     
+            <script>
+                document.getElementById('downloadButton').addEventListener('click', function () {
+                    const { jsPDF } = window.jspdf;
+        const pdf = new jsPDF();
+        const pageWidth = pdf.internal.pageSize.getWidth();
+        
+        // Fetch form data
+        const name = document.getElementById('name').value;
+        const matric = document.getElementById('matric').value;
+        const department = document.getElementById('department').value;
+        const section = document.getElementById('section').value;
+        const level = document.getElementById('level').value;
+        const semester = document.getElementById('semester').value;
+        
+        // Add content to the PDF
+        pdf.setFontSize(16);
+        pdf.text('Student Record', 10, 10);
+        pdf.setFontSize(12);
+        pdf.text(`Full Name: ${name}`, 10, 30);
+        pdf.text(`Matric: ${matric}`, 10, 40);
+        pdf.text(`Department: ${department}`, 10, 50);
+        pdf.text(`Section: ${section}`, 10, 60);
+        pdf.text(`Level: ${level}`, 10, 70);
+        pdf.text(`Semester: ${semester}`, 10, 80);
+        
+        // Prepare data for the table
+        const coursesTableBody = document.getElementById('coursesTableBody');
+        const tableData = [];
+        
+        if (coursesTableBody) {
+        const rows = coursesTableBody.querySelectorAll('tr');
+        
+        rows.forEach((row, index) => {
+            const courseTitle = row.querySelector('input[name^="courses"][name$="[course_title]"]').value;
+            const courseCode = row.querySelector('input[name^="courses"][name$="[course_code]"]').value;
+            const courseUnit = row.querySelector('input[name^="courses"][name$="[course_unit]"]').value;
+            const assessment1 = row.querySelector('input[name^="courses"][name$="[assessment1]"]').value;
+            const assessment2 = row.querySelector('input[name^="courses"][name$="[assessment2]"]').value;
+            const examScore = row.querySelector('input[name^="courses"][name$="[exam_score]"]').value;
+            const totalScore = row.querySelector('input[name^="courses"][name$="[total_score]"]').value;
+            const grade = row.querySelector('input[name^="courses"][name$="[grade]"]').value;
+        
+            // Add each course data as a row in the table
+            tableData.push([
+                index + 1,
+                courseTitle,
+                courseCode,
+                courseUnit,
+                assessment1,
+                assessment2,
+                examScore,
+                totalScore,
+                grade,
+            ]);
+        });
+        }
+        
+        // Define columns for the table
+        const columns = [
+        { header: 'No.', dataKey: 'no' },
+        { header: 'Course Title', dataKey: 'courseTitle' },
+        { header: 'Course Code', dataKey: 'courseCode' },
+        { header: 'Unit', dataKey: 'courseUnit' },
+        { header: 'Assessment 1', dataKey: 'assessment1' },
+        { header: 'Assessment 2', dataKey: 'assessment2' },
+        { header: 'Exam', dataKey: 'examScore' },
+        { header: 'Total', dataKey: 'totalScore' },
+        { header: 'Grade', dataKey: 'grade' }
+        ];
+        
+        // Use the `autoTable` plugin to create a table in the PDF
+        pdf.autoTable({
+        head: [columns.map(col => col.header)],
+        body: tableData,
+        startY: 90, // Start the table below the existing content
+        theme: 'grid',
+        headStyles: { fillColor: [22, 160, 133] }, // Customize header background color (optional)
+        styles: { fontSize: 10, cellPadding: 4 }, // Adjust cell padding and font size (optional)
+        });
+        
+        // Download the PDF
+        pdf.save('user_record.pdf');
+        
+        });
+        
+            </script>
+       <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+       <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
+   
+      <!-- <script src="/jquery/dist/jquery.js"></script>
+      <script src="/bootstrap/dist/js/bootstrap.bundle.js"></script>
+      -->
+      <script src="/js/uploadResult.js"></script>
+      <script src="/js/staffDashBord.js"></script>
+  </body>
+  </html>

@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>admin dashbord/ new complaints</title>
+    <link rel="stylesheet" href="/css/admin.css">
+    <script src="https://kit.fontawesome.com/56adb67a5b.js" crossorigin="anonymous"></script>
+    <link href="/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+          <!-- small screen nav ............................................................. -->
+
+ <!-- including admin navbar -->
+ <%- include('_includeFolder/adminNav') %>
+ <!-- including admin navbar -->
+    
+    
+          <!-- small screen nav ............................................................. -->
+
+
+    
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12 col-md-3 col-lg-2 sidebar">
+                <div id="user">
+                    
+                </div>
+                <!-- including sidebar -->
+                <%- include('_includeFolder/_adminSideBar') %>
+            </div>
+            <div class="col-12 col-md-9 col-lg-10 main-content">
+              
+                
+        </div>
+        <%- include('_includeFolder/adminAcordium') %>
+        <div class="container wrap-table ">
+          <div class="resolve-complaint">
+            <span  class="h4">
+              Resolved Complaints
+            </span>
+            <input type="text" id="customSearchBox" class="form-control custom-search-input" placeholder="Search...">
+        </div>
+           
+          <table  >
+            <thead>
+                <tr>
+                    <th>S/N</th>
+                    <th>NAME</th>
+                    <th>MATRIC</th>
+                    <th>DEPARTMENT</th>
+                    <th>COURSE TITLE</th>
+                    <th>COURSE CODE</th>
+                    <th>GENDER</th>
+                    <th>PHONE NUMBER</th>
+                    <th>EMAIL</th>
+                    <th>LEVEL</th>
+                    <th>SECTION</th>
+                    <th>SEMESTER</th>
+                    <th>COMPLAINT DATE</th>
+                    <th>VIEW</th>
+                </tr>
+            </thead>
+            <tbody >
+                <% 
+                // Get the current year
+                var currentYear = new Date().getFullYear();
+                
+                // Filter complaints for the current year
+                var complaintsCurrentYear = allComplaints.filter(complaint => new Date(complaint.complaint_date).getFullYear() === currentYear);
+                
+                // Iterate through filtered complaints
+                complaintsCurrentYear.forEach((complaint, index) => { 
+                %>
+                <tr>
+                    <td><%= index + 1 %></td>
+                    <td><%= complaint.student.fname %> <%= complaint.student.lname %></td>
+                    <td><%= complaint.student.matric %></td>
+                    <td><%= complaint.student.department %></td>
+                    <td><%= complaint.course_title %></td>
+                    <td><%= complaint.course_code %></td>
+                    <td><%= complaint.student.gender %></td>
+                    <td><%= complaint.student.phone_no %></td>
+                    <td><%= complaint.student.email %></td>
+                    <td><%= complaint.level %></td>
+                    <td><%= complaint.section %></td>
+                    <td><%= complaint.semester %></td>
+                    <td><%= new Date(complaint.complaint_date).toLocaleDateString() %></td>
+                    <td><a href="/admin/view/complaints/form?id=<%= complaint._id %>">View</a></td>
+                </tr>
+                <% }); %>
+            </tbody>
+            </table>
+
+          </div>
+    </div>
+    </div>
+   
+    <!-- jQuery library -->
+    <script src="/jquery/jquery.min.js"></script>
+    <!-- Bootstrap JS Bundle (includes Popper) -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/5.1.0/js/bootstrap.bundle.min.js"></script>
+  
+    <script src="/js/userDashBord.js"></script>
+    <script src="./node_modules/bootstrap/dist/js/bootstrap.bundle.js"></script>
+    <script>
+        function openNav() {
+          document.getElementById("mySidenav").style.width = "100%";
+          document.getElementById("mySidenav").style.height = "40%";
+          document.getElementById("main").classList.add("open"); // Add class to push down
+        }
+        
+        function closeNav() {
+          document.getElementById("mySidenav").style.width = "0";
+          document.getElementById("main").classList.remove("open"); // Remove class to return to original position
+        }
+        </script> 
+
+<script>
+    document.getElementById('customSearchBox').addEventListener('input', function () {
+      var searchValue = this.value.toLowerCase();
+      var tableRows = document.querySelectorAll('#complaintTable tbody tr');
+      
+      tableRows.forEach(function (row) {
+        // Check if the row contains the search value
+        var rowText = row.textContent.toLowerCase();
+        
+        if (rowText.includes(searchValue)) {
+          row.style.display = ''; // Show the row
+        } else {
+          row.style.display = 'none'; // Hide the row
+        }
+      });
+    });
+  </script>
+        <script src="/js/adminDashBord.js"></script>
+
+</body>
+</html>

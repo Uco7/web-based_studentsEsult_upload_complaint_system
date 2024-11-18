@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard/ Student Uploaded Result Page</title>
+    <link rel="stylesheet" href="/css/dashbord.css">
+    <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css">
+    <script src="https://kit.fontawesome.com/56adb67a5b.js" crossorigin="anonymous"></script>
+    
+    </head>
+    <body>
+          <!-- small screen nav ............................................................. -->
+
+    
+ <!-- including admin navbar -->
+ <%- include('_includeFolder/adminNav') %>
+ <!-- including admin navbar -->
+    
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12 col-md-3 col-lg-2 sidebar">
+                <div id="user">
+                    
+                </div>
+                <!-- including sidebar -->
+                <%- include('_includeFolder/_adminSideBar') %>
+
+            </div>
+            <div class="col-12 col-md-9 col-lg-10 main-content">
+              
+                
+        </div>
+        <%- include('_includeFolder/adminAcordium') %>
+        <div class="container wrap-table">
+          <div class="resolve-complaint">
+            <span class="h4" style="padding: 5px; color: #70837d;"><%= uploadedResult.name %>  <%=uploadedResult.matric  %>  <%=uploadedResult.department  %></span>
+          </div>
+        
+          <table id="complaintTable">
+            <thead>
+                <tr>
+                  <th>S/N</th>
+                  <th>Student Name</th>
+                  <th>Matric Number</th>
+             
+                  <th>Section</th>
+                  <th>Level</th>
+                  <th>Semester</th>
+                  <th>Course Title</th>
+                  <th>Course Code</th>
+                  <th>Grade</th>
+                </tr>
+              </thead>
+              <tbody style="background-color:#70837d; color: white;">
+                <% if (uploadedResult) { %>
+                  <% let student = uploadedResult; %>
+                  <% for (let i = 0; i < student.courses.length; i++) { %>
+                    <tr>
+                      <% if (i === 0) { %>
+                        <td rowspan="<%= student.courses.length %>"><%= i + 1 %></td>
+                        <td rowspan="<%= student.courses.length %>"><%= student.student.fname + ' ' + student.student.lname %></td>
+                        <td rowspan="<%= student.courses.length %>"><%= student.matric %></td>
+                        <td rowspan="<%= student.courses.length %>"><%= student.section %></td>
+                        <td rowspan="<%= student.courses.length %>"><%= student.level %></td>
+                        <td rowspan="<%= student.courses.length %>"><%= student.semester %></td>
+                      <% } %>
+                      <td><%= student.courses[i].course_title %></td>
+                      <td><%= student.courses[i].course_code %></td>
+                      <td><%= student.courses[i].course_unit %></td>
+                      <td><%= student.courses[i].assessment1 %></td>
+                      <td><%= student.courses[i].assessment2 %></td>
+                      <td><%= student.courses[i].exam_score %></td>
+                      <td><%= student.courses[i].total_score %></td>
+                      <td><%= student.courses[i].grade %></td>
+                    </tr>
+                  <% } %>
+                <% } else { %>
+                  <tr>
+                    <td colspan="10">No results available</td>
+                  </tr>
+                <% } %>
+              </tbody>
+          </table>
+        </div>
+        
+        <script>
+          // Store the original order of rows
+          var originalRows = Array.from(document.querySelectorAll('#complaintTable tbody tr'));
+        
+          document.getElementById('customSearchBox').addEventListener('input', function () {
+            var searchValue = this.value.toLowerCase();
+            var table = document.querySelector('#complaintTable tbody');
+            var rows = Array.from(table.querySelectorAll('tr'));
+        
+            if (searchValue === "") {
+              // If no input, restore the original table order
+              table.innerHTML = '';
+              originalRows.forEach(function (row) {
+                table.appendChild(row);
+                row.style.display = ''; // Show all rows
+              });
+            } else {
+              rows.forEach(function (row) {
+                var name = row.cells[1].textContent.toLowerCase();       // Name column (index 1)
+                var matricNumber = row.cells[2].textContent.toLowerCase(); // Matric number column (index 2)
+                var submitDate = new Date(row.cells[6].textContent).toLocaleDateString().toLowerCase(); // Submit date column (index 6)
+                
+                // Check if the search value matches any of the relevant fields
+                if (name.includes(searchValue) || matricNumber.includes(searchValue) || submitDate.includes(searchValue)) {
+                  row.style.display = ''; // Show the row
+                } else {
+                  row.style.display = 'none'; // Hide the row
+                }
+              });
+            }
+          });
+        </script>
+      <script src="/js/adminDashBord.js"></script>
+
+        
+</body>
+</html>

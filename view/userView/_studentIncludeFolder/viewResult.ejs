@@ -1,0 +1,41 @@
+<div class="container check-result" style="display: none;">
+    <h2 id ="h2-check">View Results</h2>
+    <form action="/student/view/result" method="POST">
+        <div class="col-md-6">
+            <label for="matric">Matric Number:</label>
+            <input type="text" id="matric" name="matric" required class="form-control">
+        </div>
+        <div class="col-md-6">
+            <label for="section">Section:</label>
+            <select name="section" id="section" class="form-control" required>
+                <option value="">Choose Section</option>
+                <option value="2020/2021">2020/2021</option>
+                <option value="2021/2022">2021/2022</option>
+                <option value="2022/2023">2022/2023</option>
+                <option value="2023/2024">2023/2024</option>
+                <option value="2024/2025">2024/2025</option>
+                <option value="2025/2026">2025/2026</option>
+            </select>
+        </div>
+        <div class="col-md-6">
+            <label for="level">Level:</label>
+            <select name="level" id="level" class="form-control" required>
+                <option value="">Choose Level</option>
+                <option value="100">100</option>
+                <option value="200">200</option>
+                <option value="300">300</option>
+                <option value="400">400</option>
+                <option value="500">500</option>
+            </select>
+        </div>
+        <div class="col-md-6">
+            <label for="semester">Semester:</label>
+            <select name="semester" id="semester" class="form-control" required>
+                <option value="">Semester</option>
+                <option value="first ">First Semester</option>
+                <option value="second">Second Semester</option>
+            </select>
+        </div>
+        <button type="submit" id="btn-result" class="btn btn-primary">View Result</button>
+    </form>
+</div>

@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>admin Dashboard</title>
+    <link rel="stylesheet" href="/css/adminDashBord.css">
+    <script src="https://kit.fontawesome.com/56adb67a5b.js" crossorigin="anonymous"></script>
+    <link href="/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+          <!-- small screen nav ............................................................. -->
+
+ <!-- including admin navbar -->
+ <%- include('_includeFolder/adminNav') %>
+ <!-- including admin navbar -->
+    
+    
+    
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12 col-md-3 col-lg-2 sidebar">
+                <div id="user">
+                    
+                </div>
+                <!-- including sidebar -->
+                <%- include('_includeFolder/_adminSideBar') %>
+            </div>
+            <div class="col-12 col-md-9 col-lg-10 main-content">
+              
+                
+        </div>
+        <%- include('_includeFolder/adminAcordium') %>
+        <div class="container box-cont">
+            <div class="boxes">
+                <div class="box box1">
+                    <div class="num" id="num1">5</div>
+                    <div class="box-txt" id="box-txt1">Registered Staffs</div>
+                </div>
+                <div class="box box1">
+                    <div class="num" id="num1"><%= registeredStudents.length %> </div>
+                    <div class="box-txt" id="box-txt1">Registered Students</div>
+                </div>
+                <div class="box box1">
+                    <div class="num" id="num1"><%= allComplaints.length %></div>
+                    <div class="box-txt" id="box-txt1">Total Complaints</div>
+                </div>
+                <div class="box box2">
+                    <div class="num" id="num2"> <%= complaint.length %> </div>
+                    <div class="box-txt" id="box-txt2">Resolved Complaints</div>
+                </div>
+               
+            </div>
+        </div>
+                 <!-- including admin sidebar -->
+                 <div class="wrap-all normal-tb">
+                    <div class="container  admin-tb1">
+                      <div class="wrap-txt text-center">
+                        <h2 class="text-center" >students Complaints</h2>
+                      </div>
+                    <table class="table">
+                            <thead>
+                                <tr>
+                                    <th scope="col">S/N</th>
+                                    <th  scope="col">NAME</th>
+                                    <th scope="col">MATRIC</th>
+                                    <!-- <th>DEPARTMENT</th> -->
+                                    <th scope="col">COMPLAINT DATE</th>
+                                    <th scope="col">VIEW</th>
+                                </tr>
+                            </thead>
+                            <tbody >
+                                <% for (let i = 0; i < allComplaints.length; i++) { %>
+                                    <tr>
+                                        <td><%= i + 1 %></td>
+                                        <td><%= allComplaints[i].student.fname %> <%= allComplaints[i].student.lname %></td>
+                                        <td><%= allComplaints[i].student.matric %></td>
+                                        <td><%= new Date(allComplaints[i].complaint_date).toLocaleDateString() %></td>
+                                       
+                                        <td id="view-td"><a href="/admin/view/complaints/form?id=<%= allComplaints[i]._id %>">View</a>
+                                    </tr>
+                                <% } %>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="container  admin-tb2">
+                        <div class="wrap-txt text-center">
+                          <h2 class="text-center" >Resolved Complaints</h2>
+                        </div>
+                      <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Matric Number</th>
+                                <th>Student Name</th>
+                                <th>Course Title</th>
+                                <th>Course Code</th>
+                                <th>Grade</th>
+                                <th>Staff Name</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <% complaint.forEach((item) => { %>
+                                    <tr>
+                                        <td><%= item.matric %></td>
+                                        <td><%= item.stu_name %></td>
+                                        <td><%= item.course_title %></td>
+                                        <td><%= item.course_code %></td>
+                                        <td><%= item.grade %></td>
+                                        <td><%= item.staff_name %></td>
+                                        <td style="color: green; font-size: large; font-weight: 400;"><%= item.status %></td>
+                                    </tr>
+                               
+                            <% }); %>
+                        </tbody>
+                 
+                    </div>
+                </div>
+            </div>
+            <script>
+                function openNav() {
+                  document.getElementById("mySidenav").style.width = "100%";
+                  document.getElementById("mySidenav").style.height = "40%";
+                  document.getElementById("main").classList.add("open"); // Add class to push down
+                }
+                
+                function closeNav() {
+                  document.getElementById("mySidenav").style.width = "0";
+                  document.getElementById("main").classList.remove("open"); // Remove class to return to original position
+                }
+                </script>
+                       <script src="/jquery/dist/jquery.js"></script>
+                       <script src="/bootstrap/dist/js/bootstrap.bundle.js"></script>
+                       <script src="/js/adminDashBord.js"></script>
+                   </body>
+                   </html>
+      
+    
+    
+

@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Complaint Page</title>
+    <link rel="stylesheet" href="/css/adminProfile.css">
+    <link rel="stylesheet" href="/css/dashbord.css">
+
+<!-- staff   nav bar -->
+<%- include('_staffIncludeFolder/staffNavBar') %>
+<!-- staff   nav bar -->
+<%- include('_staffIncludeFolder/staffAcordium') %>
+<style>
+    .container {
+    display: flex;
+    justify-content: center; /* Center the images */
+    gap: 20px; /* Space between the image wrappers */
+}
+
+.image-wrapper {
+    text-align: center; /* Ensure text is centered under each image */
+}
+
+.image-wrapper img {
+    display: block;
+    margin: 0 auto;
+}
+
+.image-wrapper span {
+    display: block;
+    margin-top: 5px;
+    font-weight: bold;
+}
+</style>
+<%- include('_staffIncludeFolder/staffAcordium') %>
+
+    <div class="container wrapp" id="complaintSection">
+        <h2 id="bio" class="text-center">Student Complaint Form</h2>
+        <form class="row g-3" action="" method="post" enctype="multipart/form-data">
+            <div class="container text-center">
+                <% if (complaint && complaint.registeredCourse) { %>
+                    <!-- Wrapper for Registered Course Image and Text -->
+                    <div class="image-wrapper">
+                        <img src="data:image/jpeg;base64,<%= complaint.registeredCourse %>" alt="Registered Course Image" style="width: 600px; height: 400px; border-radius: 10px;">
+                        <span class="reg-course">Registered Course</span>
+                    </div>
+                    <input type="hidden" name="existingResult" value="<%= complaint.result %>">
+            
+                    <!-- Wrapper for Uploaded Result Image and Text -->
+                    <div class="image-wrapper">
+                        <img src="data:image/jpeg;base64,<%= complaint.registeredCourse %>" alt="Uploaded Result Image" style="width: 600px; height: 400px; border-radius: 10px;">
+                        <span class="result">Uploaded Result</span>
+                    </div>
+                    <input type="hidden" name="existingRegisteredCourse" value="<%= complaint.registeredCourse %>">
+                <% } else { %>
+                    <p>No registered course image available.</p>
+                <% } %>
+            </div>
+
+            <div class="col-md-6">
+                <label for="fname" class="form-label">First Name</label>
+                <input type="text" class="form-control" name="fname" value="<%= complaint?.student?.fname || '' %>" required>
+            </div>
+
+            <div class="col-md-6">
+                <label for="lname" class="form-label">Last Name</label>
+                <input type="text" class="form-control" name="lname" value="<%= complaint?.student?.lname || '' %>" required>
+            </div>
+
+          
+
+            <div class="col-md-6">
+                <label for="department" class="form-label">Department</label>
+                <input type="text" class="form-control" name="department" value="<%= complaint?.student?.department || '' %>">
+            </div>
+
+            <div class="col-md-6">
+                <label for="email" class="form-label">Email</label>
+                <input type="email" class="form-control" name="email" value="<%= complaint?.student?.email || '' %>" required>
+            </div>
+
+            <div class="col-md-6">
+                <label for="phone_no" class="form-label">Phone Number</label>
+                <input type="text" class="form-control" name="phone_no" value="<%= complaint?.student?.phone_no || '' %>" required>
+            </div>
+
+            <div class="col-md-6">
+                <label for="course_title" class="form-label">Course Title</label>
+                <input type="text" class="form-control" name="course_title" placeholder="Enter course title" value="<%= complaint?.course_title || '' %>" required>
+            </div>
+
+            <div class="col-md-6">
+                <label for="course_code" class="form-label">Course Code</label>
+                <input type="text" class="form-control" name="course_code" placeholder="Enter course code" value="<%= complaint?.course_code || '' %>" required>
+            </div>
+            <div class="col-md-6">
+                <label for="complaint_date" class="form-label">Complaint Date</label>
+                <input type="text" class="form-control" name="complaint_date" value="<%= complaint ? new Date(complaint.complaint_date).toLocaleDateString() : '' %>" required>
+            </div>
+            <div class="col-md-6">
+                <label for="section" class="form-label">Section</label>
+                <select name="section" id="section" class="form-control" required>
+                    <option value="">Section</option>
+                    <option value="2020/2021" <% if (complaint?.section === '2020/2021') { %>selected<% } %>>2020/2021</option>
+                    <option value="2021/2022" <% if (complaint?.section === '2021/2022') { %>selected<% } %>>2021/2022</option>
+                    <option value="2022/2023" <% if (complaint?.section === '2022/2023') { %>selected<% } %>>2022/2023</option>
+                    <option value="2023/2024" <% if (complaint?.section === '2023/2024') { %>selected<% } %>>2023/2024</option>
+                    <option value="2024/2025" <% if (complaint?.section === '2024/2025') { %>selected<% } %>>2024/2025</option>
+                    <option value="2025/2026" <% if (complaint?.section === '2025/2026') { %>selected<% } %>>2025/2026</option>
+                </select>
+            </div>
+
+            <div class="col-md-6">
+                <label for="level" class="form-label">Level</label>
+                <select name="level" id="level" class="form-control" required>
+                    <option value="">Level</option>
+                    <option value="100" <% if (complaint?.level == 100) { %>selected<% } %>>100</option>
+                    <option value="200" <% if (complaint?.level == 200) { %>selected<% } %>>200</option>
+                    <option value="300" <% if (complaint?.level == 300) { %>selected<% } %>>300</option>
+                    <option value="400" <% if (complaint?.level == 400) { %>selected<% } %>>400</option>
+                    <option value="500" <% if (complaint?.level == 500) { %>selected<% } %>>500</option>
+                </select>
+            </div>
+
+            <div class="col-md-6">
+                <label for="semester" class="form-label">Semester</label>
+                <select name="semester" id="semester" class="form-control" required>
+                    <option value="">Semester</option>
+                    <option value="first" <% if (complaint?.semester === 'first') { %>selected<% } %>>First Semester</option>
+                    <option value="second" <% if (complaint?.semester === 'second') { %>selected<% } %>>Second Semester</option>
+                </select>
+            </div>
+
+            <div class="col-md-6">
+                <label for="matric" class="form-label">Matric Number</label>
+                <input type="text" class="form-control" name="matric" placeholder="Provide the matric number" value="<%= complaint?.student?.matric || '' %>" required>
+            </div>
+
+            <div class="col-md-12">
+                <label for="comment" class="form-label">Complaint Description</label>
+                <textarea name="comment" id="comment" class="form-control" rows="5" required><%= complaint?.comment || '' %></textarea>
+            </div>
+            <div class="col-12">
+                <button class="btn btn-primary" style="width: 20%;">  
+                    <a href="/staff/view/update/result/page?mat_no=<%= complaint?.student?.matric || '' %>&section=<%= complaint?.section %>&level=<%= complaint?.level %>&semester=<%= complaint?.semester%>" style="color: white; text-decoration: none;">Resolve Complaint</a>                   
+                </button>
+            </div>
+            
+        </form>
+    </div>
+</body>
+</html>
+
+<!-- <a href="/staff/proceed/resolve/complaint?id=" class="btn btn-success">Proceed To Resolve Complaint</a> -->

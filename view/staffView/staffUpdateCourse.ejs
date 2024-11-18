@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/dashbord.css">
+
+    <link rel="stylesheet" href="/css/register.css">
+    <title>Staff Update Course</title>
+    </head>
+    <body >
+<!-- staff   nav bar -->
+<%- include('_staffIncludeFolder/staffNavBar') %>
+<!-- staff   nav bar -->
+<%- include('_staffIncludeFolder/staffAcordium') %>
+
+    
+
+
+<div class="container mt-5 courseForm">
+    <h2 class="text-center mb-4 cousee-h2">Update Semester Course Registration </h2>
+    <div class="wrap-course">
+            <form id="courseForm">
+                <div class="col-md-6">
+                    <label for="email" class="form-label">email:</label>
+                    <input type="email" class="form-control" id="email" name="email" required>
+                </div>
+                <div class="col-md-6">
+                    <label for="course_code" class="form-label">Course Code:</label>
+                    <input type="text" class="form-control" id="course_code" name="course_code" value="<%= typeof courses !== 'undefined' && courses.course_code ? courses.course_code : '' %>" required>
+                </div>
+                
+                <div class="col-md-6">
+                    <label for="course_title" class="form-label">Course Title:</label>
+                    <input type="text" class="form-control" id="course_title" name="course_title" value="<%= typeof courses !== 'undefined' && courses.course_title ? courses.course_title : '' %>" required>
+                </div>
+                
+                <div class="col-md-6">
+                    <label for="semester" class="form-label">Semester:</label>
+                    <select class="form-select" id="semester" name="semester" required>
+                        <option value="">Select Semester</option>
+                        <option value="first" <%= typeof courses !== 'undefined' && courses.semester === 'first' ? 'selected' : '' %>>First Semester</option>
+                        <option value="second" <%= typeof courses !== 'undefined' && courses.semester === 'second' ? 'selected' : '' %>>Second Semester</option>
+                    </select>
+                </div>
+                
+                <div class="col-md-6">
+                    <label for="section" class="form-label">Section:</label>
+                    <select class="form-select" id="section" name="section" required>
+                        <option value="">Choose Section</option>
+                        <option value="2020/2021" <%= typeof courses !== 'undefined' && courses.section === '2020/2021' ? 'selected' : '' %>>2020/2021</option>
+                        <option value="2021/2022" <%= typeof courses !== 'undefined' && courses.section === '2021/2022' ? 'selected' : '' %>>2021/2022</option>
+                        <option value="2022/2023" <%= typeof courses !== 'undefined' && courses.section === '2022/2023' ? 'selected' : '' %>>2022/2023</option>
+                        <option value="2023/2024" <%= typeof courses !== 'undefined' && courses.section === '2023/2024' ? 'selected' : '' %>>2023/2024</option>
+                        <option value="2024/2025" <%= typeof courses !== 'undefined' && courses.section === '2024/2025' ? 'selected' : '' %>>2024/2025</option>
+                    </select>
+                </div>
+                
+                <div class="col-md-6">
+                    <label for="level" class="form-label">Level:</label>
+                    <select class="form-select" id="level" name="level" required>
+                        <option value="">Select Level</option>
+                        <option value="100" <%= typeof courses !== 'undefined' && courses.level === '100' ? 'selected' : '' %>>100</option>
+                        <option value="200" <%= typeof courses !== 'undefined' && courses.level === '200' ? 'selected' : '' %>>200</option>
+                        <option value="300" <%= typeof courses !== 'undefined' && courses.level === '300' ? 'selected' : '' %>>300</option>
+                        <option value="400" <%= typeof courses !== 'undefined' && courses.level === '400' ? 'selected' : '' %>>400</option>
+                        <option value="500" <%= typeof courses !== 'undefined' && courses.level === '500' ? 'selected' : '' %>>500</option>
+                    </select>
+                </div>
+                
+                <div class="col-md-6">
+                    <label for="department" class="form-label">Department:</label>
+                    <input type="text" class="form-control" id="department" name="department" value="<%= typeof courses !== 'undefined' && courses.department ? courses.department : '' %>" required>
+                </div>
+                
+                <div class="text-center">
+                    <button type="submit" class="btn btn-primary course-btn">Register</button>
+                </div>
+            </form>
+
+        </div>
+       
+    </div>
+
+    <script src="/jquery/jquery.min.js"></script>
+    <script src="/bootstrap/dist/js/bootstrap.min.js"></script>
+    
+    <script>
+        document.getElementById('courseForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            
+            // Prepare the course data from the form inputs
+            const courseData = {
+                email: document.getElementById('email').value,
+                course_code: document.getElementById('course_code').value,
+                course_title: document.getElementById('course_title').value,
+                semester: document.getElementById('semester').value,
+                section: document.getElementById('section').value,
+                level: document.getElementById('level').value,
+                department: document.getElementById('department').value
+            };
+    
+            console.log('Course Data:', courseData);
+    
+            // Make a POST request to register the new course
+            fetch(`http://localhost:5000/api/staff/register/course`, {  // Adjust the endpoint to register course
+                method: 'POST',  // Change method to POST for registering a new course
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(courseData)  // Send course data as JSON
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log('Response Data:', data);
+                if (data.status === "success") {
+                    alert('Course registered successfully!');
+                } else {
+                    alert(`Error: ${data.status}`);
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('An error occurred while registering the course.');
+            });
+        });
+    </script>
+    
+</body>
+</html>
+
+      

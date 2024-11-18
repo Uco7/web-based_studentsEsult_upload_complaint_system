@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Dashboard</title>
+    <link rel="stylesheet" href="/css/userDashBord.css">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/5.1.0/css/bootstrap.min.css">
+</head>
+<body>
+    <!-- including nav bar -->
+    <%- include('_studentIncludeFolder/navbar') %>
+    
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12 col-md-3 col-lg-2 sidebar">
+                <div class="userimg">
+                    <img src="data:<%= user.imageType %>;base64,<%= user.profileImage %>" alt="Profile Image" style="width: 50px; height: 50px; border-radius: 50px; " id="sidProfile">
+                </div>
+                <div id="user">
+                    <p><%= user.role %></p>
+                    <p><%= user.matric %></p>
+                </div>
+                <!-- including sidebar -->
+                <%- include('_studentIncludeFolder/userSideBar') %>
+            </div>
+            <div class="col-12 col-md-9 col-lg-10 main-content">
+                <%- include('_studentIncludeFolder/acordium') %>
+                <div class="wrapp-box bx">
+                    <div class="container box-cont">
+                        <div class="box1 ">
+                            <h2>Are You New Here?</h2>
+                            <p>If you are a new student/user, kindly go through the following steps:</p>
+                            <ul>
+                                <li>You can update your profile</li>
+                                <li>Check results</li>
+                                <li>Lay complaint about your result with ease</li>
+                            </ul>
+                        </div>
+                        <div class="box2 bg-secondry">
+                            <h2>If You Need Any Help or Are Confused About Anything</h2>
+                            <p>Kindly contact us through this email: ucheuc070@gmail.com</p>
+                        </div>
+                    </div>
+
+                   
+                </div>
+                      <!-- check result section///////////////////////////////////////////// -->
+                      <%- include('_studentIncludeFolder/viewResult') %>
+
+                      <!-- check result section///////////////////////////////////////////// -->
+                
+                <!-- complaint section/////////////////////////////////////////////////////////////////////// -->
+                <%- include('_studentIncludeFolder/complaint') %>
+
+                <!-- complaint section/////////////////////////////////////////////////////////////////////// -->
+            </div>
+        </div>
+    </div>
+   
+    <!-- jQuery library -->
+    <script src="/jquery/jquery.min.js"></script>
+    <!-- Bootstrap JS Bundle (includes Popper) -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/5.1.0/js/bootstrap.bundle.min.js"></script>
+    <!-- <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var myAccordion = new bootstrap.Accordion(document.getElementById('accordionExample'));
+        });
+    </script> -->
+    <script src="/js/userDashBord.js"></script>
+</body>
+</html>

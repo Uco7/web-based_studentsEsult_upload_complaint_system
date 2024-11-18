@@ -1,0 +1,142 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Staff Dasbord/Resolved Complaint Page</title>
+     <link rel="stylesheet" href="/css/dashbord.css">
+    <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css">
+    <script src="https://kit.fontawesome.com/56adb67a5b.js" crossorigin="anonymous"></script>
+    
+    </head>
+    <body>
+          <!-- small screen nav ............................................................. -->
+      <!-- sidebar nav ............................................................. -->
+
+
+      <%- include('_staffIncludeFolder/staffNavBar') %>
+
+      <!-- sidebar nav ............................................................. -->
+
+    
+    
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12 col-md-3 col-lg-2 sidebar">
+                <div id="user">
+                    
+                </div>
+                <!-- including sidebar -->
+                <%- include('_staffIncludeFolder/staffSideBar') %>
+
+            </div>
+            <div class="col-12 col-md-9 col-lg-10 main-content">
+              
+                
+        </div>
+        <%- include('_staffIncludeFolder/staffAcordium') %>
+
+        <div class="container box-cont" style="display: none;">
+            <div class="boxes">
+                <div class="box box1">
+                    <div class="num" id="num1">5</div>
+                    <div class="box-txt" id="box-txt1">Total Complaints</div>
+                </div>
+                <div class="box box2">
+                    <div class="num" id="num2">5</div>
+                    <div class="box-txt" id="box-txt2">Resolved Complaints</div>
+                </div>
+                <div class="box box3">
+                    <div class="num" id="num3">5</div>
+                    <div class="box-txt" id="box-txt3">Pendding Complaints</div>
+                </div>
+            </div>
+        </div>
+        <div class="container wrap-table ">
+            <div class="wrap-txt text-center">
+              <h2 class="text-center"  id="h2">All Resolved Complaints</h2>
+            </div>
+          <table  >
+              <thead>
+                <tr>
+                    <tr>
+                        <th>S/N</th>
+                        <!-- <th>Staff Name</th> -->
+                        <th>Student Name</th>
+                
+                  
+                        <th>Department</th>
+                        <th>Matric Number</th>
+                        <th>Course Code</th>
+                        <th>Course Title</th>
+                        <th>Section</th>
+                        <th>Semester</th>
+                        <th>Level</th>
+                        <th>Submit Date</th>
+                        <th>Status</th>
+                      
+                      
+                    </tr>
+              </thead>
+              <tbody>
+                <% if(complaint){%>
+                    <% complaint.forEach((comp, index) => { %>
+                        <tr>
+                            <td><%= index + 1 %></td>
+                            
+                            <td><%= comp.stu_name %></td>
+                         
+                         
+                            <td><%= comp.department %></td>
+                            <td><%= comp.matric %></td>
+                            <td><%= comp.course_code %></td>
+                            <td><%= comp.course_title %></td>
+                            <td><%= comp.section %></td>
+                            <td><%= comp.semester %></td>
+                            <td><%= comp.level %></td>
+                            <td><%= new Date(comp.submitDate).toLocaleDateString() %></td>
+                           
+                           <td style="color: green; font-size: large;font-weight: 600;"><%= comp.status %></td>
+                        </tr>
+                    <% }) %>
+            
+              <%   }else{ %>
+                <tr>
+                    <td colspan="11"></td>
+                   
+                </tr>
+            
+            <% } %>
+              </tbody>
+            
+            </table>
+
+          </div>
+    </div>
+    </div>
+   
+    <!-- jQuery library -->
+    <script src="/jquery/jquery.min.js"></script>
+    <!-- Bootstrap JS Bundle (includes Popper) -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/5.1.0/js/bootstrap.bundle.min.js"></script>
+  
+    <script src="/js/userDashBord.js"></script>
+    <script src="./node_modules/bootstrap/dist/js/bootstrap.bundle.js"></script>
+    <script>
+        function openNav() {
+          document.getElementById("mySidenav").style.width = "100%";
+          document.getElementById("mySidenav").style.height = "40%";
+          document.getElementById("main").classList.add("open"); // Add class to push down
+        }
+        
+        function closeNav() {
+          document.getElementById("mySidenav").style.width = "0";
+          document.getElementById("main").classList.remove("open"); // Remove class to return to original position
+        }
+        </script> <script src="/js/staffDashBord.js"></script>
+</body>
+</html>
+
+
+
