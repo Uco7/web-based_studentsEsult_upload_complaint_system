@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home Page</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <script src="https://kit.fontawesome.com/56adb67a5b.js" crossorigin="anonymous"></script>
+    <link href="/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg">
+        <div class="container-fluid">
+            <img src="/image/ucogo.png" alt="logo" style="width: 50px; height: 50px; border-radius: 50%;">
+            
+            <ul class="nav justify-content-end">
+                <li class="nav-item">
+                    <a class="nav-link log-out" href="/registration/page">Register</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link log-out" href="/login/page">Log In</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link log-out" href="#">About Us</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link   contact-nav" href="#" id=" contact-nav"> Contact Us</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <section class="welcome-msg">
+        <div class="container">
+            <div class="txt  container " id="txtwlc">
+                <h3 id="buy" style="color: #b8860B;">  
+                     </h3><span>we offer  solutions to your  academic results  complaints</span><br>
+                    
+                
+        </div>
+    </section>
+    
+    <section>
+
+        <div class="container">
+            <div class=" start-txt text-center">
+
+                <h4 >How to get started: New to the site  don't worry  our site got you covered</h4>
+            </div>
+        </div>
+    </section>
+    <div class="wrap-section">
+        <section class=" wrap-cont">
+            
+            <div class="headin-text container">
+                <h4> We Have Solution <br>
+                    Get Started Now </h4>
+                </div>
+        <div class="container cont">
+            <div class="text-body">
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Velit, <br>placeat porro sit cupiditate accusantium fugiat exercitationem, 
+                    <br>fugit soluta reprehenderit ipsum sunt nesciunt delectus assumenda nostrum asperiores,<br>  dicta omnis saepe repellat!</p>
+                
+                    <div class="wrap-btn container">
+                        <button class="btn "> Register Now </button>
+            
+                    </div>
+                </div>
+                <img src="/image/creative-thinking-concept-illustration_114360-3507.jpg" alt="" style="width: 800px; height: 400px;">
+
+        </div>
+  
+       
+    </section>
+</div>
+
+<section class="summary">
+    <div class="container">
+        <div class="cont">
+          
+            <div class="about-summary ab-sum">
+                <h6>About Us</h6>
+                <ul>
+                    <li> <a href="#">Home</a></li>
+                    <li> <a href="#"> About Us</a></li>
+                    <li> <a href="#">Blog</a></li>
+                    <li> <a href="#"> Work With Us</a></li>
+                    <li> <a href="#"> Terms &  Conditions</a></li>
+                </ul>
+            </div>
+            <div class="about-summary services">
+                <h6>Services</h6>
+                <ul>
+                    <li> <a href="#">Search Terms</a></li>
+                    <li> <a href="#"> Advance Search</a></li>
+                    <li> <a href="#">Privacy & Policy</a></li>
+                    <li> <a href="#"> Suport Us</a></li>
+                    <li> <a href="#"> Our Stores</a></li>
+                </ul>
+            </div>
+            <div class="about-summary contact">
+                <h6>Contact Us</h6>
+                <ul>
+                    <li> <i class="fa-solid fa-phone"></i> <a href="#">+123 ikwo street</a></li>
+                    <li> <i class="fa-solid fa-envelope"></i><a href="#"> Suport@gmail.com</a></li>
+                    <li> <a href="#"> +123 customer Care </a></li>
+                    
+                </ul>
+            </div>
+        </div>
+    </div>  
+
+</section>
+<section  class="footer">
+    <footer class="copy"> @copy right 2024 </footer>
+    <div class="footer-icon ">
+        <i class="fa-brands fa-facebook" id="footer-icon"></i>
+        <i class="fa-brands fa-twitter" id="footer-icon"></i>
+        <i class="fa-brands fa-instagram" id="footer-icon"></i>
+    </div>
+</section>
+<script>
+    // let buy=document.getElementById("buy")
+    window.addEventListener("load",function(){
+  typeWriter()
+    })
+    var i = 0;
+  var txt = ' Welcome To  Students Result Upload Complaints System';
+  var speed = 100;
+    function typeWriter() {
+  if (i < txt.length) {
+    document.getElementById("buy").innerHTML += txt.charAt(i);
+    i++;
+    setTimeout(typeWriter, speed);
+  }
+  }
+  
+  
+  
+  
+  
+  
+  
+  
+  </script>
+  
+     
+    <script src="/jquery/dist/jquery.js"></script>
+    <script src="/bootstrap/dist/js/bootstrap.bundle.js"></script>
+   
+    
+</body>
+</html>

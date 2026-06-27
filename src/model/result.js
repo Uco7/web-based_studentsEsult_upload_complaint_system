@@ -26,7 +26,7 @@ const userSchema = new mongoose.Schema({
   section: { type: String, required: true },
   level: { type: Number, required: true },
   semester: { type: String, required: true },
-  courses: [courseSchema]  // Embed the course schema as an array
+  courses: [ResultSchema]  // Embed the course schema as an array
 });
 
 const Result = mongoose.model('uploadedResult', userSchema);
