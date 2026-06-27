@@ -8,7 +8,7 @@ const registerRoute=require("./src/route/registerActor")
 const userHandleRoute=require("./src/route/userAuthRoute")
 const apiFindRoute=require("./src/route/crudeRute")
 
-
+require("dotenv").config()
 const app=express()
 complaintDb()
 app.set('views', path.join(__dirname, 'view'));
@@ -22,6 +22,7 @@ app.use('/jquery', express.static(path.join(__dirname, 'node_modules/jquery/dist
 //     res.status(404).render('errorPage');
 // });
 
+
 // Global error handler
 app.use((err, req, res, next) => {
     console.error(err.stack);
@@ -34,7 +35,8 @@ app.use(pageRenderRoute)
 app.use(registerRoute)
 app.use(userHandleRoute)
 app.use(apiFindRoute)
-app.listen(5000,()=>{
+const PORT=process.env.PORT
+app.listen(PORT,()=>{
     console.log('app listen on port 5000')})
 
 
