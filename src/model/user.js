@@ -9,7 +9,6 @@ const userSchema = new mongoose.Schema({
   email: {
     type: String,
     required: true,
-   
     match: [
       /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
       'Please fill a valid email address',
@@ -76,7 +75,7 @@ const userSchema = new mongoose.Schema({
   matric: {
     type: String,
     required: true,
-    unique:true,
+    unique: true,
     match: [
       /^\d{4}\/[A-Z]+\/\d+$/,
       'Please fill a valid matric number',
@@ -89,34 +88,38 @@ const userSchema = new mongoose.Schema({
   },
   profileImage: {
     type: String,
-    required:true // Assuming you store the image as a base64 string
+    required: true // Storing the image as a base64 string
   },
-  imageType:{
+  imageType: {
     type: String,
-    required:true 
-    
+    required: true 
   }
 });
-userSchema.pre("save", async function(next){
-    const salt= await bcrypt.genSalt(10)
-    this.password=await bcrypt.hash(this.password, salt);
-    next();
-})
-userSchema.statics.login= async function(matric, password){
-    const userExist=await this.findOne({matric})
-    if(userExist){
-        const isPswMatch= await bcrypt.compare(password,userExist.password);
-      if(isPswMatch){
-        return userExist;
 
-    } 
+// 1. Fixed Pre-save Hook: Removed 'next' callback parameter since this is async
+userSchema.pre("save", async function() {
+    // Only hash the password if it is new or being explicitly updated
+    if (!this.isModified('password')) return;
 
-    throw new Error("password miss matched or invalide matric")
+    const salt = await bcrypt.genSalt(10);
+    this.password = await bcrypt.hash(this.password, salt);
+});
+
+// 2. Fixed Login Static Method: Standardized response messages for security
+userSchema.statics.login = async function(matric, password) {
+    const userExist = await this.findOne({ matric });
+    
+    if (userExist) {
+        const isPswMatch = await bcrypt.compare(password, userExist.password);
+        if (isPswMatch) {
+            return userExist;
+        } 
     }
-throw new Error ("user not found")
-}
+    
+    // Unified generic message prevents attackers from mapping valid matriculations
+    throw new Error("Invalid matric number or password.");
+};
+
 const User = mongoose.model('User', userSchema);
 
-module.exports = User
-
-
+module.exports = User;
